@@ -1,4 +1,4 @@
-package class_10;
+package class_09;
 
 import java.util.Stack;
 // 2*r - prev_min = encoded 

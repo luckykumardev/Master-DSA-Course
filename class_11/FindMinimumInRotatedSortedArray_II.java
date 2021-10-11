@@ -1,4 +1,4 @@
-package class_10;
+package class_11;
 
 public class FindMinimumInRotatedSortedArray_II {
 	public int findMin(int[] nums) {

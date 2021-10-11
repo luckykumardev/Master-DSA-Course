@@ -1,4 +1,4 @@
-package class_10;
+package class_11;
 
 public class SearchA2DMatrix {
 	public boolean searchMatrix(int[][] matrix, int target) {
