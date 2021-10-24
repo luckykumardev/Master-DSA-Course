@@ -1,5 +1,7 @@
-package class_11;
-
+package class_13;
+/*
+  https://leetcode.com/problems/median-of-two-sorted-arrays/
+*/
 public class MedianOfTwoSortedArray {
     public double findMedianSortedArrays(int[] input1, int[] input2) {
         if (input1.length > input2.length) {
