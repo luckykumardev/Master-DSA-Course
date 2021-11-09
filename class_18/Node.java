@@ -1,12 +1,11 @@
-package class_17;
+package class_18;
 
 public class Node {
 	int val;
 	Node left;
 	Node right;
 	Node next;
-	public Node(int val) {
-		this.val = val;
+	Node(int val) {
+		this.val = val;	
 	}
-	
 }
