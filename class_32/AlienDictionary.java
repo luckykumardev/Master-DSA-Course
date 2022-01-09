@@ -1,4 +1,4 @@
-package class_30;
+package class_32;
 /*
  https://leetcode.com/problems/alien-dictionary/
 */
