@@ -1,4 +1,4 @@
-package class_47;
+package class_48;
 
 import java.util.ArrayList;
 import java.util.Arrays;
