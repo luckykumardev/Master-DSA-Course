@@ -1,0 +1,80 @@
+package class_40;
+/*
+ https://leetcode.com/problems/house-robber/
+*/
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public int rob(int[] nums) {
+        if (nums == null || nums.length == 0) {
+            return 0;
+        }
+        if (nums.length == 1) {
+            return nums[0];
+        }
+
+        int n = nums.length;
+        int[] dp = new int[n];
+        dp[0] = nums[0];
+        dp[1] = Math.max(nums[0], nums[1]);
+
+        for (int i = 2; i < n; i++) {
+            dp[i] = Math.max(dp[i - 1], nums[i] + dp[i - 2]);
+        }
+
+        
+        List<List<Integer>> ways = new ArrayList<>();
+        backtrack(nums, dp, n - 1, new ArrayList<>(), ways);
+
+        for (List<Integer> way : ways) {
+            System.out.println("Way to rob: " + way);
+        }
+
+        return dp[n - 1];
+    }
+
+    private void backtrack(int[] nums, int[] dp, int index, List<Integer> current, List<List<Integer>> ways) {
+        if (index < 0) {
+            ways.add(new ArrayList<>(current));
+            return;
+        }
+
+        if (index == 0) {
+            current.add(0);
+            ways.add(new ArrayList<>(current));
+            current.remove(current.size() - 1);
+            return;
+        }
+
+        
+        if (index == 1 && dp[index] == nums[1]) {
+            current.add(1);
+            ways.add(new ArrayList<>(current));
+            current.remove(current.size() - 1);
+        } else if (index == 1 && dp[index] == nums[0]) {
+            current.add(0);
+            ways.add(new ArrayList<>(current));
+            current.remove(current.size() - 1);
+        } else {
+            if (dp[index] == dp[index - 1]) {
+                backtrack(nums, dp, index - 1, current, ways);
+            }
+            if (dp[index] == nums[index] + dp[index - 2]) {
+                current.add(index);
+                backtrack(nums, dp, index - 2, current, ways);
+                current.remove(current.size() - 1);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums1 = {1, 2, 3, 1};
+        int[] nums2 = {2, 7, 9, 3, 1};
+
+        System.out.println("Maximum amount of money that can be robbed from [1, 2, 3, 1]: " + solution.rob(nums1));
+        System.out.println("Maximum amount of money that can be robbed from [2, 7, 9, 3, 1]: " + solution.rob(nums2));
+    }
+}
