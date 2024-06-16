@@ -1,0 +1,59 @@
+package class_39;
+/*
+ https://leetcode.com/problems/climbing-stairs/
+*/
+
+
+class HelloWorld {
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int n2 = 4;
+        List<List<Integer>> result2 = solution.getAllWaysToClimbStairs(n2);
+        System.out.println("Input: n = " + n2);
+        System.out.println("Output: " + result2.size() + " ways");
+        for (List<Integer> way : result2) {
+            System.out.println(way);
+        }
+    }
+}
+
+class Solution {
+    public List<List<Integer>> getAllWaysToClimbStairs(int n) {
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> path = new ArrayList<>();
+        climbStairsHelper(n, path, result);
+        return result;
+    }
+    
+    private void climbStairsHelper(int n, List<Integer> path, List<List<Integer>> result) {
+        if (n == 0) {
+            result.add(new ArrayList<>(path));
+            return;
+        }
+
+        if (n < 0) {
+            return;
+        }
+
+        path.add(1);
+        climbStairsHelper(n - 1, path, result);
+        path.remove(path.size() - 1);  // backtrack
+
+        path.add(2);
+        climbStairsHelper(n - 2, path, result);
+        path.remove(path.size() - 1);  // backtrack
+    }
+
+    public int climbStairs(int n) {
+        if (n <= 1) return 1;
+        int prev1 = 1;
+        int prev2 = 2;
+
+        for (int i = 3; i <= n; i++) {
+            int val = prev1 + prev2;
+            prev1 = prev2;
+            prev2 = val;
+        }
+        return prev2;
+    }
+}
