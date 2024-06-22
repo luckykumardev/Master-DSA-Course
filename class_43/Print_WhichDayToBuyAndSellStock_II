@@ -1,0 +1,47 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public static class Transaction {
+        int buyDay;
+        int buyPrice;
+        int sellDay;
+        int sellPrice;
+
+        Transaction(int buyDay, int buyPrice, int sellDay, int sellPrice) {
+            this.buyDay = buyDay;
+            this.buyPrice = buyPrice;
+            this.sellDay = sellDay;
+            this.sellPrice = sellPrice;
+        }
+    }
+
+    public int maxProfit(int[] prices) {
+        int maxProfit = 0;
+        List<Transaction> transactions = new ArrayList<>();
+
+        for (int i = 1; i < prices.length; i++) {
+            if (prices[i] > prices[i - 1]) {
+                maxProfit += prices[i] - prices[i - 1];
+                transactions.add(new Transaction(i - 1, prices[i - 1], i, prices[i]));
+            }
+        }
+
+        for (Transaction t : transactions) {
+            System.out.println("Buy on day " + (t.buyDay + 1) + " at price " + t.buyPrice);
+            System.out.println("Sell on day " + (t.sellDay + 1) + " at price " + t.sellPrice);
+        }
+
+        return maxProfit;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        int[] prices1 = {7, 1, 5, 3, 6, 4};
+        int[] prices2 = {1, 2, 3, 4, 5};
+        int[] prices3 = {7, 6, 4, 3, 1};
+
+        System.out.println("Total Profit: " + sol.maxProfit(prices1)); // Output: 7
+       
+    }
+}
